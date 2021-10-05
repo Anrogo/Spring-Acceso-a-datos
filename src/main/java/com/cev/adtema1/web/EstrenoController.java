@@ -20,7 +20,7 @@ public class EstrenoController {
 	}
 
 	@GetMapping(path = "/estrenos")
-	List<Estreno> getAll(){
+	List<Estreno> getEstrenos(){
 		return estrenoRepository.findAll(); 
 	}
 	
