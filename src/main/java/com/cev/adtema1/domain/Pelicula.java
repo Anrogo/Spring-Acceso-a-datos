@@ -1,10 +1,12 @@
 package com.cev.adtema1.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,6 +27,10 @@ public class Pelicula {
 	@OneToOne(mappedBy = "pelicula")
 	@JsonManagedReference
 	Estreno estreno;
+	
+	@OneToMany(mappedBy = "pelicula")
+	@JsonManagedReference
+	List<Review> reviews;
 	
 	public Long getId() {
 		return id;
@@ -68,6 +74,13 @@ public class Pelicula {
 		return "Pelicula [titulo=" + titulo + ", puntuacion=" + puntuacion + ", sinopsis=" + sinopsis + ", director="
 				+ director + ", fechaEstreno=" + fechaEstreno + "]";
 	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
 	
 
 }
