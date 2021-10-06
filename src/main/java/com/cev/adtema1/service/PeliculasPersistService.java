@@ -11,15 +11,15 @@ import com.cev.adtema1.repository.PeliculaRepository;
 @Service
 public class PeliculasPersistService {
 	PeliculaRepository peliculaRepository;
-	
+
 	public PeliculasPersistService(PeliculaRepository peliculaRepository) {
 		this.peliculaRepository = peliculaRepository;
 	}
-	
+
 	public Pelicula getPelicula(Long id) {
 		return peliculaRepository.getById(id);
 	}
-	
+
 	public Long add(Pelicula pelicula) {
 		Pelicula peliculaGuardada = peliculaRepository.save(pelicula);
 		return peliculaGuardada.getId();
@@ -28,8 +28,8 @@ public class PeliculasPersistService {
 	public List<Pelicula> getPeliculas() {
 		return peliculaRepository.findAll();
 	}
-	
-	public void guarda(Long id, Pelicula pelicula ) {
+
+	public void guarda(Long id, Pelicula pelicula) {
 		Pelicula peliculaGuardada = peliculaRepository.getById(id);
 		peliculaGuardada.setDirector(pelicula.getDirector());
 		peliculaGuardada.setFechaEstreno(pelicula.getFechaEstreno());
@@ -38,26 +38,19 @@ public class PeliculasPersistService {
 		peliculaGuardada.setTitulo(pelicula.getTitulo());
 		peliculaRepository.save(peliculaGuardada);
 	}
-	
+
 	public void borra(Long id) {
 		peliculaRepository.delete(peliculaRepository.getById(id));
 	}
-	
-	public Optional<Pelicula> findById(Long id){
-		
+
+	public Optional<Pelicula> findById(Long id) {
+
 		return peliculaRepository.findById(id);
 	}
-	/*
-	public  List<Pelicula> buscaPorTitulo(String titulo) {
-		
-		List<Pelicula> peliculasResultado = new ArrayList<Pelicula>();	
-		for(Pelicula pelicula: peliculas) {
-			if( pelicula.getTitulo().contains(titulo)) {
-				peliculasResultado.add(pelicula);
-			}
-		}
-		return peliculasResultado;	
+
+	public List<Pelicula> findByTitulo(String titulo) {
+
+		return peliculaRepository.findByTituloContaining(titulo);
 	}
-	*/
-	
+
 }
