@@ -35,8 +35,12 @@ public class Pelicula {
 	List<Review> reviews;
 
 	@ManyToMany(mappedBy = "peliculas")
-	@JsonIgnoreProperties({"peliculas"})
+	@JsonIgnoreProperties({ "peliculas" })
 	List<Actor> actores;
+
+	@ManyToMany(mappedBy = "peliculas")
+	@JsonIgnoreProperties({ "peliculas" })
+	List<Cine> cine;
 
 	public Long getId() {
 		return id;
@@ -114,6 +118,14 @@ public class Pelicula {
 
 	public void setActores(List<Actor> actores) {
 		this.actores = actores;
+	}
+
+	public List<Cine> getCine() {
+		return cine;
+	}
+
+	public void setCine(List<Cine> cine) {
+		this.cine = cine;
 	}
 
 }

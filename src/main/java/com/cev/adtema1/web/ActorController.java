@@ -29,5 +29,4 @@ public class ActorController {
 		return actorRepository.save(actor);
 	}
 	
-	
 }

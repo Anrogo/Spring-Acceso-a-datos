@@ -10,16 +10,20 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class Actor {
+public class Cine {
 
 	@Id
 	@GeneratedValue
 	Long id;
-	
+
 	String nombre;
-	
+	String poblacion;
+	int codigoPostal;
+	String provincia;
+	float precio;
+
 	@ManyToMany
-	@JsonIgnoreProperties({"actores"})
+	@JsonIgnoreProperties({ "cine" })
 	List<Pelicula> peliculas;
 
 	public Long getId() {
@@ -38,6 +42,38 @@ public class Actor {
 		this.nombre = nombre;
 	}
 
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
+	public int getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
 	public List<Pelicula> getPeliculas() {
 		return peliculas;
 	}
@@ -45,5 +81,5 @@ public class Actor {
 	public void setPeliculas(List<Pelicula> peliculas) {
 		this.peliculas = peliculas;
 	}
-	
+
 }
