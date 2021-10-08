@@ -31,12 +31,19 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
 	List<Pelicula> findByTituloContainingIgnoreCase(String titulo);
 
 	List<Pelicula> findByActores_nombreContainingIgnoreCaseOrderByPuntuacionDesc(String nombre);
-	
-	//CONSULTA HQL
+
+	List<Pelicula> findByCines_nombreContainingIgnoreCase(String nombre);
+
+	// CONSULTA HQL
 	@Query("Select pelicula from Pelicula pelicula where pelicula.titulo =: titulo")
 	List<Pelicula> findByTituloHibernate(@Param("titulo") String titulo);
-	
-	//CONSULTA SQL. Son más recomendables para actualizar datos
+
+	// CONSULTA SQL. Son más recomendables para actualizar datos
 	@Query(nativeQuery = true, value = " select * from pelicula p where p.titulo =:titulo")
 	List<Pelicula> findByTitulosSql(@Param("titulo") String titulo);
+
+	// CONSULTA SQL para obtener listado de cines y precios de menor a mayor en
+	// función de la película dada
+	@Query(nativeQuery = true, value = "SELECT PELICULA.TITULO, CINE.NOMBRE, CINE.PRECIO FROM CINE_PELICULAS JOIN PELICULA  ON (PELICULA.ID = CINE_PELICULAS.PELICULAS_ID) JOIN CINE ON (CINE.ID = CINE_PELICULAS.CINES_ID) WHERE PELICULA.TITULO LIKE :titulo% ORDER BY PRECIO")
+	List<Pelicula> findByTitulo(String titulo);
 }

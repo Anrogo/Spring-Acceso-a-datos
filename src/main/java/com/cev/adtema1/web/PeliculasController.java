@@ -117,6 +117,17 @@ public class PeliculasController {
 		return ("OK");
 	}
 
+	@GetMapping(path = "/peliculasPrecio")
+	List<Pelicula> getPeliculaPrecio(@RequestParam(required = false, name = "titulo") String titulo){
+		
+		if(titulo != null) {
+			return peliculaRepository.findByTitulo(titulo);
+		} else {
+			return peliculaRepository.findAll();
+		}
+		
+	}
+	
 	@GetMapping(path = "/peliculasHeader")
 	ResponseEntity<List<Pelicula>> getPeliculasHeader() {
 		HttpHeaders headers = new HttpHeaders();

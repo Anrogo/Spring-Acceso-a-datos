@@ -2,22 +2,30 @@ package com.cev.adtema1.web;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cev.adtema1.domain.Cine;
+import com.cev.adtema1.domain.Pelicula;
 import com.cev.adtema1.repository.CineRepository;
+import com.cev.adtema1.repository.PeliculaRepository;
 
 @RestController
 public class CineController {
 
+	@Autowired
 	CineRepository cineRepository;
 
+	@Autowired
+	PeliculaRepository peliculaRepository;
+	
 	public CineController(CineRepository cineRepository) {
 		this.cineRepository = cineRepository;
 	}
@@ -40,7 +48,7 @@ public class CineController {
 		cineGuardado.setCodigoPostal(cine.getCodigoPostal());
 		cineGuardado.setProvincia(cine.getProvincia());
 		cineGuardado.setPrecio(cine.getPrecio());
-		cineRepository.save(cineGuardado);
+		cineGuardado.setPeliculas(cine.getPeliculas());
 		return cine;
 	}
 
@@ -49,5 +57,25 @@ public class CineController {
 		cineRepository.delete(cineRepository.getById(id));
 		return ("OK");
 	}
+
+	@GetMapping(path = "/cinesPrueba")
+	List<Cine> getCinesPrueba(@RequestParam(required = false, name = "nombre") String nombre) {
+		// return cineRepository.findOrderByPrecioDesc();
+		if (nombre != null) {
+			return cineRepository.findByNombreContainingIgnoreCase(nombre);
+		} else {
+			return cineRepository.findAll();
+		}
+	}
+	
+	@GetMapping(path = "/cinesPrecio")
+	List<Pelicula> getCinesPrecio(@RequestParam(required = false, name = "titulo") String titulo) {
+		if (titulo != null) {
+			return cineRepository.findByTituloContainingIgnoreCase(titulo);
+		} else {
+			return peliculaRepository.findAll();
+		}
+	}
+
 
 }

@@ -40,7 +40,7 @@ public class Pelicula {
 
 	@ManyToMany(mappedBy = "peliculas")
 	@JsonIgnoreProperties({ "peliculas" })
-	List<Cine> cine;
+	List<Cine> cines;
 
 	public Long getId() {
 		return id;
@@ -121,11 +121,11 @@ public class Pelicula {
 	}
 
 	public List<Cine> getCine() {
-		return cine;
+		return cines;
 	}
 
-	public void setCine(List<Cine> cine) {
-		this.cine = cine;
+	public void setCine(List<Cine> cines) {
+		this.cines = cines;
 	}
 
 }
