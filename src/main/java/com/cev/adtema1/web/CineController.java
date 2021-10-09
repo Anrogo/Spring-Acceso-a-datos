@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cev.adtema1.domain.Cine;
-import com.cev.adtema1.domain.Pelicula;
 import com.cev.adtema1.repository.CineRepository;
 import com.cev.adtema1.repository.PeliculaRepository;
 
@@ -57,25 +55,16 @@ public class CineController {
 		cineRepository.delete(cineRepository.getById(id));
 		return ("OK");
 	}
-
-	@GetMapping(path = "/cinesPrueba")
-	List<Cine> getCinesPrueba(@RequestParam(required = false, name = "nombre") String nombre) {
-		// return cineRepository.findOrderByPrecioDesc();
-		if (nombre != null) {
-			return cineRepository.findByNombreContainingIgnoreCase(nombre);
-		} else {
-			return cineRepository.findAll();
-		}
-	}
-	
+/*
 	@GetMapping(path = "/cinesPrecio")
-	List<Pelicula> getCinesPrecio(@RequestParam(required = false, name = "titulo") String titulo) {
+	List<Pelicula> getCinesPrueba(@RequestParam(required = false, name = "titulo") String titulo) {
+		// return cineRepository.findOrderByPrecioDesc();
 		if (titulo != null) {
-			return cineRepository.findByTituloContainingIgnoreCase(titulo);
+			return cineRepository.findAllByPeliculasTitulo_OrderByPrecioAsc(titulo);
 		} else {
 			return peliculaRepository.findAll();
 		}
 	}
-
+*/
 
 }

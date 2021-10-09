@@ -1,4 +1,3 @@
-/*
 package com.cev.adtema1.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +37,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-}*/
+}

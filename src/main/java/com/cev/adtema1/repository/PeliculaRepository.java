@@ -41,9 +41,8 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
 	// CONSULTA SQL. Son más recomendables para actualizar datos
 	@Query(nativeQuery = true, value = " select * from pelicula p where p.titulo =:titulo")
 	List<Pelicula> findByTitulosSql(@Param("titulo") String titulo);
-
-	// CONSULTA SQL para obtener listado de cines y precios de menor a mayor en
-	// función de la película dada
-	@Query(nativeQuery = true, value = "SELECT PELICULA.TITULO, CINE.NOMBRE, CINE.PRECIO FROM CINE_PELICULAS JOIN PELICULA  ON (PELICULA.ID = CINE_PELICULAS.PELICULAS_ID) JOIN CINE ON (CINE.ID = CINE_PELICULAS.CINES_ID) WHERE PELICULA.TITULO LIKE :titulo% ORDER BY PRECIO")
-	List<Pelicula> findByTitulo(String titulo);
+	
+	
+	//Consulta del ejercicio para obtener el listado de la pelicula con los cines en los que se proyecta (EL PRECIO NO SE ORDENA COMO DEBERÍA):
+	List<Pelicula> findAllByTitulo_OrderByCinesPrecioDesc(String titulo);
 }

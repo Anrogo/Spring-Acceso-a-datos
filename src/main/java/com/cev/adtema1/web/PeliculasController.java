@@ -121,7 +121,7 @@ public class PeliculasController {
 	List<Pelicula> getPeliculaPrecio(@RequestParam(required = false, name = "titulo") String titulo){
 		
 		if(titulo != null) {
-			return peliculaRepository.findByTitulo(titulo);
+			return peliculaRepository.findAllByTitulo_OrderByCinesPrecioDesc(titulo);
 		} else {
 			return peliculaRepository.findAll();
 		}

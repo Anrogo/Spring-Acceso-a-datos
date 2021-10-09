@@ -16,5 +16,5 @@ public interface CineRepository extends JpaRepository<Cine, Long> {
 	List<Pelicula> findByTituloContainingIgnoreCase(String titulo);
 	
 	//Consulta de prueba:
-	List<Cine> findByNombreContainingIgnoreCase(String nombre);
+	List<Pelicula> findAllByPeliculasTitulo_OrderByPrecioAsc(String titulo);
 }
